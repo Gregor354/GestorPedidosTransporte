@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"WIN-59JDF64IOMC-11436-stderr-1708966465220.txt","computername":"WIN-59JDF64IOMC","pid":11436,"type":"stderr","created":1708966465220},{"file":"WIN-59JDF64IOMC-11480-stderr-1709044115996.txt","computername":"WIN-59JDF64IOMC","pid":11480,"type":"stderr","created":1709044115996},{"file":"WIN-59JDF64IOMC-11536-stderr-1708963791450.txt","computername":"WIN-59JDF64IOMC","pid":11536,"type":"stderr","created":1708963791450},{"file":"WIN-59JDF64IOMC-11680-stderr-1708964509049.txt","computername":"WIN-59JDF64IOMC","pid":11680,"type":"stderr","created":1708964509049},{"file":"WIN-59JDF64IOMC-13128-stderr-1708963799327.txt","computername":"WIN-59JDF64IOMC","pid":13128,"type":"stderr","created":1708963799327},{"file":"WIN-59JDF64IOMC-13288-stderr-1708964433028.txt","computername":"WIN-59JDF64IOMC","pid":13288,"type":"stderr","created":1708964433028},{"file":"WIN-59JDF64IOMC-13584-stderr-1708964502088.txt","computername":"WIN-59JDF64IOMC","pid":13584,"type":"stderr","created":1708964502088},{"file":"WIN-59JDF64IOMC-13780-stderr-1708964486774.txt","computername":"WIN-59JDF64IOMC","pid":13780,"type":"stderr","created":1708964486774},{"file":"WIN-59JDF64IOMC-14156-stderr-1708964488654.txt","computername":"WIN-59JDF64IOMC","pid":14156,"type":"stderr","created":1708964488654},{"file":"WIN-59JDF64IOMC-14260-stderr-1708963795720.txt","computername":"WIN-59JDF64IOMC","pid":14260,"type":"stderr","created":1708963795720},{"file":"WIN-59JDF64IOMC-14464-stderr-1709057822283.txt","computername":"WIN-59JDF64IOMC","pid":14464,"type":"stderr","created":1709057822283},{"file":"WIN-59JDF64IOMC-14464-stdout-1709057822272.txt","computername":"WIN-59JDF64IOMC","pid":14464,"type":"stdout","created":1709057822272},{"file":"WIN-59JDF64IOMC-15304-stderr-1709044129259.txt","computername":"WIN-59JDF64IOMC","pid":15304,"type":"stderr","created":1709044129259},{"file":"WIN-59JDF64IOMC-15776-stderr-1708964485034.txt","computername":"WIN-59JDF64IOMC","pid":15776,"type":"stderr","created":1708964485034},{"file":"WIN-59JDF64IOMC-15932-stderr-1708964503631.txt","computername":"WIN-59JDF64IOMC","pid":15932,"type":"stderr","created":1708964503631},{"file":"WIN-59JDF64IOMC-16116-stderr-1708963793626.txt","computername":"WIN-59JDF64IOMC","pid":16116,"type":"stderr","created":1708963793626},{"file":"WIN-59JDF64IOMC-2432-stderr-1709056809896.txt","computername":"WIN-59JDF64IOMC","pid":2432,"type":"stderr","created":1709056809896},{"file":"WIN-59JDF64IOMC-2432-stdout-1709056809888.txt","computername":"WIN-59JDF64IOMC","pid":2432,"type":"stdout","created":1709056809888},{"file":"WIN-59JDF64IOMC-2792-stderr-1709044126873.txt","computername":"WIN-59JDF64IOMC","pid":2792,"type":"stderr","created":1709044126873},{"file":"WIN-59JDF64IOMC-3888-stderr-1708963797394.txt","computername":"WIN-59JDF64IOMC","pid":3888,"type":"stderr","created":1708963797394},{"file":"WIN-59JDF64IOMC-5164-stderr-1708924513326.txt","computername":"WIN-59JDF64IOMC","pid":5164,"type":"stderr","created":1708924513326},{"file":"WIN-59JDF64IOMC-660-stderr-1708966463357.txt","computername":"WIN-59JDF64IOMC","pid":660,"type":"stderr","created":1708966463357}];
+        var lastUpdated = 1709057823853;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>
