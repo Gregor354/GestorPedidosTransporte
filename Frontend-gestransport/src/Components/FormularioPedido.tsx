@@ -426,8 +426,12 @@ const FormularioPedido: React.FC<FormularioPedidoProps> = ({ contenidoCentral, s
         formData.append('tipo_transporte', tipoTransporteSeleccionado);
         formData.append('detalles_destino', detallesDestinoInput);
         formData.append('fecha_solicitud', fechaSolicitudInput);
-        // formData.append('oficio_solicitud', oficioSolicitudInput);
-        // formData.append('seguro_riesgo', seguroRiesgoInput);
+        if (oficioSolicitudInput) {
+          formData.append('oficio_solicitud', oficioSolicitudInput);
+        }
+        if (seguroRiesgoInput) {
+          formData.append('seguro_riesgo', seguroRiesgoInput);
+        };
         formData.append('cantidad_dias', cantidadDiasInput);
         formData.append('cantidad_noches', cantidadNochesInput);
         formData.append('lugar_descansa_bus', lugarDescansaBusInput);
@@ -453,7 +457,7 @@ const FormularioPedido: React.FC<FormularioPedidoProps> = ({ contenidoCentral, s
         // });
 
         // Enviar la solicitud POST al servidor
-        const response = await fetch('http://localhost:3300/api/pedido-transporte', {
+        const response = await fetch('http://localhost:3300/api/insertar-pedido-transporte', {
             method: 'POST',
             body: formData,
         });
@@ -481,7 +485,7 @@ const FormularioPedido: React.FC<FormularioPedidoProps> = ({ contenidoCentral, s
         <>
             {/* formulario */}
             <form id="form" 
-            //onsubmit="guardarFichaMedOcup(event)"
+              onSubmit={e => { e.preventDefault(); guardarFichaMedOcup(); }}
             >
               {/* Tipo de transporte */}
               <div className="card">

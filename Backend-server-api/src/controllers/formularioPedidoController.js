@@ -1,7 +1,7 @@
 const sql = require('mssql');
 const { configLocalPedidos } = require('../config/dbConfig');
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' }); // Carpeta temporal para archivos
+//const upload = multer({ dest: 'uploads/' }); // Carpeta temporal para archivos
 
 const getTipoTransporte = async (req, res) => {
     let pool = null;
