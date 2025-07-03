@@ -1,6 +1,7 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import type { LeafletMouseEvent } from "leaflet";
+import dynamic from "next/dynamic";
 
 interface ModalSeleccionarUbicacionProps {
     onClose: () => void;
@@ -17,13 +18,13 @@ const LocationMarker = ({ onSelect }: { onSelect: (lat: string, lng: string) => 
         },
     });
 
-  return position === null ? null : <Marker position={position} />;
+    return position === null ? null : <Marker position={position} />;
 };
 
 const ModalSeleccionarUbicacion: React.FC<ModalSeleccionarUbicacionProps> = ({ onClose, onSelect }) => (
     <div className="modal-overlay" onClick={onClose}>
-        <div 
-            className="modal-content" 
+        <div
+            className="modal-content"
             style={{ width: "700px", maxWidth: "95vw", minHeight: "450px" }}
             onClick={e => e.stopPropagation()}
         >
