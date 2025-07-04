@@ -528,7 +528,7 @@ const FormularioPedido: React.FC<FormularioPedidoProps> = ({ contenidoCentral, s
                         />
                       </div>
                       <div className="col-50">
-                        <label htmlFor="fecha_solicitud">Fecha de solicitud: ({fechaSolicitudInput})</label>
+                        <label htmlFor="fecha_solicitud">Fecha de solicitud:</label>
                         <input
                           type="date"
                           id="fecha_solicitud"
